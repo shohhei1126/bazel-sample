@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "color.go",
+        "pp.go",
+        "printer.go",
+    ],
+    importpath = "github.com/k0kubun/pp",
+    visibility = ["//visibility:public"],
+    deps = ["//vendor/github.com/mattn/go-colorable:go_default_library"],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = [
+        "color_test.go",
+        "pp_test.go",
+        "printer_test.go",
+    ],
+    embed = [":go_default_library"],
+    deps = ["@com_github_k0kubun_colorstring//:go_default_library"],
+)
